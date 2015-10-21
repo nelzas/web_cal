@@ -1,5 +1,6 @@
 import os
 import pathlib
+import calendar
 
 from bottle import route, run, static_file
 
@@ -9,7 +10,13 @@ BASE_PATH = pathlib.Path(__file__).parent
 
 @route('/')
 def home():
-    return 'Hello world! <img src="static/python.png"/>'
+    return 'Hello world! ' + calendar.HTMLCalendar().formatmonth(2015, 10)
+
+
+@route('/<display_year:int>/<display_month:int>')
+def this_month(display_year, display_month):
+    return calendar.HTMLCalendar().formatmonth(theyear=display_year,
+                                               themonth=display_month)
 
 
 @route('/static/<filepath:path>')
