@@ -15,7 +15,8 @@ def home():
 
 @route('/<display_year:int>/')
 def the_year(display_year):
-    return calendar.HTMLCalendar().formatyear(theyear=display_year)
+    return template('tpl_year', prev_year=display_year-1, next_year=display_year+1) + \
+        calendar.HTMLCalendar().formatyear(theyear=display_year)
 
 
 @route('/<display_year:int>/<display_month:int>/')
