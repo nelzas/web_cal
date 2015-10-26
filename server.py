@@ -2,7 +2,7 @@ import os
 import pathlib
 import calendar
 
-from bottle import route, run, static_file
+from bottle import route, run, static_file, template
 
 PORT = int(os.environ.get("PORT", 5000))
 BASE_PATH = pathlib.Path(__file__).parent
@@ -11,6 +11,12 @@ BASE_PATH = pathlib.Path(__file__).parent
 @route('/')
 def home():
     return 'Hello world! ' + calendar.HTMLCalendar().formatmonth(2015, 10)
+
+
+@route('/test_tpl')
+@route('/test_tpl/<name>')
+def test_tpl(name='World'):
+    return template('tpl_test', name=name, next_year=2011) + calendar.HTMLCalendar().formatyear(theyear=2010)
 
 
 @route('/<display_year:int>/')
