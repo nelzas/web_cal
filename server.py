@@ -2,7 +2,7 @@ import os
 import pathlib
 import calendar
 
-from bottle import route, run, static_file, template
+from bottle import route, run, static_file, template, redirect
 
 PORT = int(os.environ.get("PORT", 5000))
 BASE_PATH = pathlib.Path(__file__).parent
@@ -44,6 +44,11 @@ def the_month(display_year, display_month):
                     next_month=next_month) + \
         calendar.HTMLCalendar().formatmonth(theyear=display_year,
                                             themonth=display_month)
+
+
+@route('<path:re:.+[^/]$>')
+def add_slash(path):
+    return redirect(path + "/")
 
 
 @route('/static/<filepath:path>')
