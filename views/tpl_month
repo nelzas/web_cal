@@ -1,0 +1,4 @@
+<pre>
+<a href="../../{{year_for_prev_month}}/{{prev_month}}/">prev month</a> <span style="right"> <a href="../../{{year_for_next_month}}/{{next_month}}/">next month</a> </span>
+</pre>
+

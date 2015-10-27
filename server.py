@@ -27,8 +27,23 @@ def the_year(display_year):
 
 @route('/<display_year:int>/<display_month:int>/')
 def the_month(display_year, display_month):
-    return calendar.HTMLCalendar().formatmonth(theyear=display_year,
-                                               themonth=display_month)
+    prev_month=display_month-1
+    next_month=display_month+1
+    year_for_prev_month = display_year
+    year_for_next_month = display_year
+    if prev_month == 0:
+        prev_month = 12
+        year_for_prev_month -= 1
+    if next_month == 13:
+        next_month = 1
+        year_for_next_month += 1
+    return template('tpl_month',
+                    year_for_prev_month=year_for_prev_month,
+                    prev_month=prev_month,
+                    year_for_next_month=year_for_next_month,
+                    next_month=next_month) + \
+        calendar.HTMLCalendar().formatmonth(theyear=display_year,
+                                            themonth=display_month)
 
 
 @route('/static/<filepath:path>')
